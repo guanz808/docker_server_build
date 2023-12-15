@@ -6,7 +6,6 @@ Prerequisits:
 
 To run the install and configuration Ubuntu Server 23.10 (84-bit):  
 ```bash
-sudo apt update && apt upgrade -y
 sudo apt install curl git -y
 cd $pwd
 curl -o ~/serverbuild.sh https://raw.githubusercontent.com/guanz808/docker_server_build/main/serverbuild.sh
