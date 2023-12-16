@@ -46,7 +46,7 @@ check_command "sudo tee -a /etc/hosts"
 echo "## Set Time Zone"
 sudo timedatectl set-timezone Pacific/Honolulu
 timedatectl status
-check_command "sudo timedatectl set-timezone Pacific/Honolulu -y"
+check_command "sudo timedatectl set-timezone Pacific/Honolulu -y" 
 
 # Install Neofetch
 echo "## Install Neofetch"
