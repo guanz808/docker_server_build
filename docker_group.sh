@@ -21,6 +21,3 @@ else
   sudo usermod -aG docker $USER
   echo "Done."
 fi
-
-# restarts the shell to apply the group membership
-newgrp docker

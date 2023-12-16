@@ -6,12 +6,12 @@ Prerequisits:
 
 To run the install and configuration Ubuntu Server 23.10 (84-bit):  
 ```bash
-sudo apt install curl git -y
 cd $pwd
-curl -o ~/docker_group.sh https://raw.githubusercontent.com/guanz808/docker_server_build/main/docker_group.sh
-curl -o ~/serverbuild.sh https://raw.githubusercontent.com/guanz808/docker_server_build/main/serverbuild.sh
-chmod +x ~/docker_group.sh
-chmod +x ~/serverbuild.sh
-~/docker_group.sh -y
-~/serverbuild.sh -y
+sudo apt update && sudo apt full-upgrade
+wget -O - https://raw.githubusercontent.com/guanz808/docker_server_build/main/docker_group.sh | bash
+newgrp docker  # restarts the shell to apply the group membership
+wget -O - https://raw.githubusercontent.com/guanz808/docker_server_build/main/serverbuild.sh | bash
 ```
+
+To Do:
+* Fix error message "File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y" this occurs if
