@@ -9,6 +9,8 @@ To run the install and configuration Ubuntu Server 23.10 (84-bit):
 cd $pwd
 sudo apt update -y
 sudo apt full-upgrade -y
+`note:` if running on a raspberry pi reboot before proceeding  
+
 wget -O - https://raw.githubusercontent.com/guanz808/docker_server_build/main/docker_group.sh | bash
 newgrp docker  # restarts the shell to apply the group membership
 wget -O - https://raw.githubusercontent.com/guanz808/docker_server_build/main/serverbuild.sh | bash
