@@ -11,7 +11,7 @@ cd $pwd
 sudo apt update -y
 sudo apt full-upgrade -y
 ```
-**NOTE**: If running on a Raspberry pi (Ubuntu Server 23.10 64-bit) the kernal is updated during the full-upgrade and requires a reboot to apply.
+**NOTE**: If running on a Raspberry Pi (Ubuntu Server 23.10 64-bit) the kernal is updated during the full-upgrade and requires a reboot to apply.
 ### Deploy  
 * #### docker_group.sh    
     This script creates a docker group and adds the current user to the group.  This allows the current user to run docker commands with sudo.  
