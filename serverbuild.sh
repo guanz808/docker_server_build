@@ -62,7 +62,7 @@ curl -o ~/.config/neofetch/config.conf https://raw.githubusercontent.com/guanz80
 
 # Append neofetch to the end of .bashrc if it doesn't exist
  echo -e "\n" "# Run Neofetch"
-sed -zi '/neofetch/!s/$/\nneofetch/' ~/.bashrc
+sed -zi '/neofetch/!s/$/\neofetch/' ~/.bashrc
 
 # Run neofetch
 neofetch
@@ -139,7 +139,9 @@ if user_is_member_of_group "$USER" "$docker_group_name"; then
 else
     # Add the user to the "docker" group
     sudo usermod -aG "$docker_group_name" "$USER"
+    # refresh the group membership
     newgrp docker
+    exit
 
     # Check if the user addition was successful
     if [ $? -eq 0 ]; then
