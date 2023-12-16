@@ -73,7 +73,7 @@ echo "## Install Docker and Docker Compose (Ubuntu)"
 sudo apt update -y
 sudo apt install ca-certificates curl gnupg -y
 sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
 echo \
@@ -95,72 +95,10 @@ check_command "Installing Docker packages"
 #sudo groupadd docker
 #check_command "sudo groupadd docker"
 
-## Function to check if a group exists
-#group_exists() {
-#    local group_name="$1"
-#    getent group "$group_name" >/dev/null 2>&1
-#}
-#
-## Define the group name
-#docker_group_name="docker"
-#
-## Check if the group exists
-#if group_exists "$docker_group_name"; then
-#    echo "Group '$docker_group_name' already exists. Skipping group creation."
-#else
-#    # Create the group
-#    sudo groupadd "$docker_group_name"
-#
-#    # Check if the group creation was successful
-#    if [ $? -eq 0 ]; then
-#        echo "Group '$docker_group_name' created successfully."
-#    else
-#        echo "Error creating group '$docker_group_name'."
-#        exit 1
-#    fi
-#fi
-#
-##sudo usermod -aG docker $USER
-##check_command "sudo usermod -aG docker $USER"
-#
-## Function to check if the user is a member of a group
-#user_is_member_of_group() {
-#    local username="$1"
-#    local groupname="$2"
-#    groups "$username" | grep -q "\<$groupname\>"
-#}
-#
-## Define the group name
-#docker_group_name="docker"
-#
-## Check if the user is a member of the "docker" group
-#if user_is_member_of_group "$USER" "$docker_group_name"; then
-#    echo "User '$USER' is already a member of the '$docker_group_name' group. Skipping group membership addition."
-#else
-#    # Add the user to the "docker" group
-#    sudo usermod -aG "$docker_group_name" "$USER"
-#    newgrp docker
-#
-#    # Check if the user addition was successful
-#    if [ $? -eq 0 ]; then
-#        echo "User '$USER' added to the '$docker_group_name' group successfully."
-#    else
-#        echo "Error adding user '$USER' to the '$docker_group_name' group."
-#        exit 1
-#    fi
-#fi
-
 # Function to check if a group exists
 group_exists() {
     local group_name="$1"
     getent group "$group_name" >/dev/null 2>&1
-}
-
-# Function to check if the user is a member of a group
-user_is_member_of_group() {
-    local username="$1"
-    local groupname="$2"
-    groups "$username" | grep -q "\<$groupname\>"
 }
 
 # Define the group name
@@ -182,13 +120,26 @@ else
     fi
 fi
 
+#sudo usermod -aG docker $USER
+#check_command "sudo usermod -aG docker $USER"
+
+# Function to check if the user is a member of a group
+user_is_member_of_group() {
+    local username="$1"
+    local groupname="$2"
+    groups "$username" | grep -q "\<$groupname\>"
+}
+
+# Define the group name
+docker_group_name="docker"
+
 # Check if the user is a member of the "docker" group
 if user_is_member_of_group "$USER" "$docker_group_name"; then
     echo "User '$USER' is already a member of the '$docker_group_name' group. Skipping group membership addition."
 else
     # Add the user to the "docker" group
     sudo usermod -aG "$docker_group_name" "$USER"
-    newgrp "$docker_group_name"
+    newgrp docker
 
     # Check if the user addition was successful
     if [ $? -eq 0 ]; then
@@ -198,6 +149,55 @@ else
         exit 1
     fi
 fi
+
+# Function to check if a group exists
+#group_exists() {
+#    local group_name="$1"
+#    getent group "$group_name" >/dev/null 2>&1
+#}
+#
+## Function to check if the user is a member of a group
+#user_is_member_of_group() {
+#    local username="$1"
+#    local groupname="$2"
+#    groups "$username" | grep -q "\<$groupname\>"
+#}
+#
+## Define the group name
+#docker_group_name="docker"
+#
+## Check if the group exists
+#if group_exists "$docker_group_name"; then
+#    echo "Group '$docker_group_name' already exists. Skipping group creation."
+#else
+#    # Create the group
+#    sudo groupadd "$docker_group_name"
+#
+#    # Check if the group creation was successful
+#    if [ $? -eq 0 ]; then
+#        echo "Group '$docker_group_name' created successfully."
+#    else
+#        echo "Error creating group '$docker_group_name'."
+#        exit 1
+#    fi
+#fi
+#
+## Check if the user is a member of the "docker" group
+#if user_is_member_of_group "$USER" "$docker_group_name"; then
+#    echo "User '$USER' is already a member of the '$docker_group_name' group. Skipping group membership addition."
+#else
+#    # Add the user to the "docker" group
+#    sudo usermod -aG "$docker_group_name" "$USER"
+#    newgrp "$docker_group_name"
+#
+#    # Check if the user addition was successful
+#    if [ $? -eq 0 ]; then
+#        echo "User '$USER' added to the '$docker_group_name' group successfully."
+#    else
+#        echo "Error adding user '$USER' to the '$docker_group_name' group."
+#        exit 1
+#    fi
+#fi
 
 
 # Install Portainer
