@@ -140,8 +140,8 @@ else
     # Add the user to the "docker" group
     sudo usermod -aG "$docker_group_name" "$USER"
     # refresh the group membership
-    newgrp docker
-    exit
+    #newgrp docker
+    #exit
 
     # Check if the user addition was successful
     if [ $? -eq 0 ]; then
@@ -269,4 +269,5 @@ else
     fi
 fi
 
-
+newgrp docker
+exit
