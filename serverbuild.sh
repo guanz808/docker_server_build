@@ -89,12 +89,6 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 check_command "Installing Docker packages"
 
 # Post install
-# To create the docker group and add your user
-#echo "## Post install"
-#echo "## Create the docker group and add your user"
-#sudo groupadd docker
-#check_command "sudo groupadd docker"
-
 # Check if the "docker" group exists
 if getent group docker >/dev/null; then
   echo "Group 'docker' exists."
@@ -117,55 +111,8 @@ else
   echo "Done."
 fi
 
-# Function to check if a group exists
-#group_exists() {
-#    local group_name="$1"
-#    getent group "$group_name" >/dev/null 2>&1
-#}
-#
-## Function to check if the user is a member of a group
-#user_is_member_of_group() {
-#    local username="$1"
-#    local groupname="$2"
-#    groups "$username" | grep -q "\<$groupname\>"
-#}
-#
-## Define the group name
-#docker_group_name="docker"
-#
-## Check if the group exists
-#if group_exists "$docker_group_name"; then
-#    echo "Group '$docker_group_name' already exists. Skipping group creation."
-#else
-#    # Create the group
-#    sudo groupadd "$docker_group_name"
-#
-#    # Check if the group creation was successful
-#    if [ $? -eq 0 ]; then
-#        echo "Group '$docker_group_name' created successfully."
-#    else
-#        echo "Error creating group '$docker_group_name'."
-#        exit 1
-#    fi
-#fi
-#
-## Check if the user is a member of the "docker" group
-#if user_is_member_of_group "$USER" "$docker_group_name"; then
-#    echo "User '$USER' is already a member of the '$docker_group_name' group. Skipping group membership addition."
-#else
-#    # Add the user to the "docker" group
-#    sudo usermod -aG "$docker_group_name" "$USER"
-#    newgrp "$docker_group_name"
-#
-#    # Check if the user addition was successful
-#    if [ $? -eq 0 ]; then
-#        echo "User '$USER' added to the '$docker_group_name' group successfully."
-#    else
-#        echo "Error adding user '$USER' to the '$docker_group_name' group."
-#        exit 1
-#    fi
-#fi
-
+# restarts the shell to apply the group membership
+newgrp docker
 
 # Install Portainer
 # Install Portainer data directory to an NFS share
@@ -233,6 +180,3 @@ else
         exit 1
     fi
 fi
-
-newgrp docker
-exit
