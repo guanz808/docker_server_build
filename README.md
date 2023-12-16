@@ -11,7 +11,7 @@ cd $pwd
 sudo apt update -y
 sudo apt full-upgrade -y
 ```
-`note:` If running on a raspberry pi reboot before proceeding, to apply the kernal updates.  
+**NOTE**: If running on a raspberry pi reboot before proceeding, to apply the kernal updates.  
 ### Deploy  
 * #### docker_group.sh    
     This script creates a docker group and adds the current user to the group.  This allows the current user to run docker commands with sudo.  
