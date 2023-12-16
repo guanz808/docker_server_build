@@ -8,7 +8,10 @@ To run the install and configuration Ubuntu Server 23.10 (84-bit):
 ```bash
 sudo apt install curl git -y
 cd $pwd
+curl -o ~/serverbuild.sh https://raw.githubusercontent.com/guanz808/docker_server_build/main/docker_group.sh
 curl -o ~/serverbuild.sh https://raw.githubusercontent.com/guanz808/docker_server_build/main/serverbuild.sh
+chmod +x ~/docker_group.sh
 chmod +x ~/serverbuild.sh
+~/docker_group.sh -y
 ~/serverbuild.sh -y
 ```
