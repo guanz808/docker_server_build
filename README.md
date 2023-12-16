@@ -31,4 +31,4 @@ wget -O - https://raw.githubusercontent.com/guanz808/docker_server_build/main/se
 ```
 
 ### To Do:
-* Fix error message "File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N) y" this occurs if
+* Fix error message "File '/etc/apt/keyrings/docker.gpg' exists. Overwrite? (y/N)"  This occurs if the docker.gpg exists.  I want to automatically apply the yes.
