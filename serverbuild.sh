@@ -72,10 +72,17 @@ echo "## Install Docker and Docker Compose (Ubuntu)"
 # Set up Docker's apt repository
 sudo apt update -y
 sudo apt install ca-certificates curl gnupg -y
+
+# Checjk if docker.pgp exists if so delete.  Otherwise reinstall of the docker.gpg will propmt to overwrite.
+# This will help run the script silently.
+if [ -f /etc/apt/keyrings/docker.gpg ]; then
+  sudo rm /etc/apt/keyrings/docker.gpg
+  echo "Existing Docker GPG key removed."
+fi
+
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
