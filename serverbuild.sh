@@ -61,7 +61,7 @@ mkdir -p ~/.config/neofetch
 curl -o ~/.config/neofetch/config.conf https://raw.githubusercontent.com/guanz808/dotfiles/main/.config/neofetch/config.conf
 
 # Append neofetch to the end of .bashrc if it doesn't exist
- echo -e "\n" "# Run Neofetch"
+echo -e "\n" "# Run Neofetch"
 sed -zi '/neofetch/!s/$/\nneofetch/' ~/.bashrc
 
 # Run neofetch
