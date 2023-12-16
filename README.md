@@ -10,5 +10,5 @@ sudo apt install curl git -y
 cd $pwd
 curl -o ~/serverbuild.sh https://raw.githubusercontent.com/guanz808/docker_server_build/main/serverbuild.sh
 chmod +x ~/serverbuild.sh
-sudo ~/serverbuild.sh -y
+~/serverbuild.sh -y
 ```
