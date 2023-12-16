@@ -16,14 +16,14 @@ sudo apt full-upgrade -y
 * #### docker_group.sh    
     This script creates a docker group and adds the current user to the group.  This allows the current user to run docker commands with sudo.  
 * #### serverbuild.sh  
-    1. Updates
-    1. Turns off firewall
-    1. Sets the host name
-    1. Sets the timezone 
-    1. Installs and configures Neofetch
-    1. Install docker and docker compose
-    1. Creates a docker volume to connect to your NFS share
-    1. Install Portainer and map the Portainer data directory to your NFS share
+1. Updates
+1. Turns off firewall
+1. Sets the host name
+1. Sets the timezone 
+1. Installs and configures Neofetch
+1. Install docker and docker compose
+1. Creates a docker volume to connect to your NFS share
+1. Install Portainer and map the Portainer data directory to your NFS share
 ```bash
 wget -O - https://raw.githubusercontent.com/guanz808/docker_server_build/main/docker_group.sh | bash
 newgrp docker  # restarts the shell to apply the group membership
