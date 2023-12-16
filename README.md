@@ -21,7 +21,7 @@ sudo apt full-upgrade -y
     * Sets the host name
     * Sets the timezone 
     * Installs and configures Neofetch
-    * Install docker and docker compose
+    * Install Docker and Docker Compose
     * Creates a docker volume to connect to your NFS share
     * Install Portainer and map the Portainer data directory to your NFS share
 ```bash
