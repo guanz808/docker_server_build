@@ -65,7 +65,7 @@ curl -o ~/.config/neofetch/config.conf https://raw.githubusercontent.com/guanz80
 sed -zi '/neofetch/!s/$/\nneofetch/' ~/.bashrc
 
 # Run neofetch
-neofetch
+#neofetch
 
 # Install Docker and Docker Compose (Ubuntu)
 echo "## Install Docker and Docker Compose (Ubuntu)"
