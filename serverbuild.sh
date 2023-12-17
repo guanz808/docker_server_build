@@ -64,22 +64,23 @@ curl -o ~/.config/neofetch/config.conf https://raw.githubusercontent.com/guanz80
 echo -e "\n" "# Run Neofetch"
 sed -zi '/neofetch/!s/$/\nneofetch/' ~/.bashrc
 
-# Install Docker and Docker Compose (Ubuntu)
-echo "## Install Docker and Docker Compose (Ubuntu)"
-# Set up Docker's apt repository
-sudo apt update -y
-sudo apt install ca-certificates curl gnupg -y
-
-# Checjk if docker.pgp exists if so delete.  Otherwise reinstall of the docker.gpg will propmt to overwrite.
+# Check if docker.pgp exists if so delete.  Otherwise reinstall of the docker.gpg will propmt to overwrite.
 # This will help run the script silently.
 if [ -f /etc/apt/keyrings/docker.gpg ]; then
   sudo rm /etc/apt/keyrings/docker.gpg
   echo "Existing Docker GPG key removed."
 fi
 
+# Install Docker and Docker Compose (Ubuntu) Ref:  https://docs.docker.com/engine/install/ubuntu/
+echo "## Install Docker and Docker Compose (Ubuntu)"
+# Add Docker's official GPG key:
+sudo apt update -y
+sudo apt install ca-certificates curl gnupg -y
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
