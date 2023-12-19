@@ -2,7 +2,7 @@
 
 hostname=dckr.dajays.com  # PROD => dckr.dajays.com => devdckr.dajays.dev
 nas_ip=192.168.1.11
-portainer_container_name=portainer_dev # PROD => portainer DEV => portainer_dev
+portainer_container_name=portainer # PROD => portainer DEV => portainer_dev
 docker_shared_folder=docker # PROD => docker DEV => docker_dev
 
 # Function to check if a command was successful check if a command was successful
@@ -114,8 +114,8 @@ docker_volume_exists() {
 if docker_volume_exists "portainer_data"; then
     echo "Docker volume 'portainer_data' already exists. Skipping creation."
 else
-    nas_ip="192.168.1.11"  # Replace with your NAS IP
-    docker_shared_folder="docker_dev"  # Replace with your folder name
+    #nas_ip="192.168.1.11"  # Replace with your NAS IP
+    #docker_shared_folder="docker_dev"  # Replace with your folder name
 
     # Create the Docker volume
     docker volume create --name portainer_data \
