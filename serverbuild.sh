@@ -93,69 +93,69 @@ check_command "Setting up Docker's apt repository"
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 check_command "Installing Docker packages"
 
-# Install Portainer
-# Install Portainer data directory to an NFS share
-# Create an /portainer-ce/data folder share on your NAS
-# Create an NFS 4 share to the /protainer-ce folder
-# Grant the appropriate permissions to the share
-echo "## Install Portainer"
-echo "## Install Portainer data directory to an NFS share (make sure to create the NFS share on your NAS first)"
-
+## Install Portainer
+## Install Portainer data directory to an NFS share
+## Create an /portainer-ce/data folder share on your NAS
+## Create an NFS 4 share to the /protainer-ce folder
+## Grant the appropriate permissions to the share
+#echo "## Install Portainer"
+#echo "## Install Portainer data directory to an NFS share (make sure to create the NFS share on your NAS first)"
+#
 sudo apt install nfs-common -y
 check_command "sudo apt install nfs-common -y"
-
-# Function to check if a Docker volume exists
-docker_volume_exists() {
-    local volume_name="$1"
-    docker volume inspect "$volume_name" >/dev/null 2>&1
-}
-
-# Check if the Docker volume exists
-if docker_volume_exists "portainer_data"; then
-    echo "Docker volume 'portainer_data' already exists. Skipping creation."
-else
-    #nas_ip="10.69.5.11"  # Replace with your NAS IP
-    #docker_shared_folder="docker_dev"  # Replace with your folder name
-
-    # Create the Docker volume
-    docker volume create --name portainer_data \
-      --driver local \
-      --opt type=nfs \
-      --opt o=addr="$nas_ip",rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4 \
-      --opt device=:/volume1/"$docker_shared_folder"/portainer-ce/data
-
-    # Check if the creation was successful
-    if [ $? -eq 0 ]; then
-        echo "Docker volume 'portainer_data' created successfully."
-    else
-        echo "Error creating Docker volume 'portainer_data'."
-        exit 1
-    fi
-fi
-
-# Function to check if a Docker container exists
-docker_container_exists() {
-    local container_name="$1"
-    docker inspect "$container_name" >/dev/null 2>&1
-}
-
-# Check if the Docker container exists
-if docker_container_exists "$portainer_container_name"; then
-    echo "Docker container '$portainer_container_name' already exists. Skipping container creation."
-else
-    # Run the Docker container
-    docker run -d -p 8000:8000 -p 9000:9000 \
-      --name="$portainer_container_name" \
-      --restart=on-failure \
-      -v /var/run/docker.sock:/var/run/docker.sock \
-      -v portainer_data:/data \
-      portainer/portainer-ce:latest
-
-    # Check if the container creation was successful
-    if [ $? -eq 0 ]; then
-        echo "Docker container '$portainer_container_name' created successfully."
-    else
-        echo "Error creating Docker container '$portainer_container_name'."
-        exit 1
-    fi
-fi
+#
+## Function to check if a Docker volume exists
+#docker_volume_exists() {
+#    local volume_name="$1"
+#    docker volume inspect "$volume_name" >/dev/null 2>&1
+#}
+#
+## Check if the Docker volume exists
+#if docker_volume_exists "portainer_data"; then
+#    echo "Docker volume 'portainer_data' already exists. Skipping creation."
+#else
+#    #nas_ip="10.69.5.11"  # Replace with your NAS IP
+#    #docker_shared_folder="docker_dev"  # Replace with your folder name
+#
+#    # Create the Docker volume
+#    docker volume create --name portainer_data \
+#      --driver local \
+#      --opt type=nfs \
+#      --opt o=addr="$nas_ip",rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4 \
+#      --opt device=:/volume1/"$docker_shared_folder"/portainer-ce/data
+#
+#    # Check if the creation was successful
+#    if [ $? -eq 0 ]; then
+#        echo "Docker volume 'portainer_data' created successfully."
+#    else
+#        echo "Error creating Docker volume 'portainer_data'."
+#        exit 1
+#    fi
+#fi
+#
+## Function to check if a Docker container exists
+#docker_container_exists() {
+#    local container_name="$1"
+#    docker inspect "$container_name" >/dev/null 2>&1
+#}
+#
+## Check if the Docker container exists
+#if docker_container_exists "$portainer_container_name"; then
+#    echo "Docker container '$portainer_container_name' already exists. Skipping container creation."
+#else
+#    # Run the Docker container
+#    docker run -d -p 8000:8000 -p 9000:9000 \
+#      --name="$portainer_container_name" \
+#      --restart=on-failure \
+#      -v /var/run/docker.sock:/var/run/docker.sock \
+#      -v portainer_data:/data \
+#      portainer/portainer-ce:latest
+#
+#    # Check if the container creation was successful
+#    if [ $? -eq 0 ]; then
+#        echo "Docker container '$portainer_container_name' created successfully."
+#    else
+#        echo "Error creating Docker container '$portainer_container_name'."
+#        exit 1
+#    fi
+#fi
